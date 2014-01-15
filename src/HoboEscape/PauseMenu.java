@@ -14,10 +14,10 @@ public class PauseMenu extends Room implements ButtonListener{
 		//super(under);
 		this.previous = previous;
 		buttons = new ButtonSet();
-		buttons.addButton(new Button(this, 0, new Color(4, 200, 150), 100, 100, 200, 50, "Resume", 20, 10));
-		buttons.addButton(new Button(this, 0, new Color(4, 200, 150), 100, 170, 200, 50, "Options", 20, 10));
-		buttons.addButton(new Button(this, 0, new Color(4, 200, 150), 100, 240, 200, 50, "Quit", 20, 10));
-		buttons.addButton(new Button(this, 0, new Color(4, 200, 150), 100, 500, 200, 50, "Quit", 20, 10));
+		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 100, 200, 50, "Resume", 20, 10));
+		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 170, 200, 50, "Options", 20, 10));
+		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 240, 200, 50, "Quit", 20, 10));
+		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 500, 200, 50, "Quit", 20, 10));
 		buttons.setListener(this);
 	}
 	/*

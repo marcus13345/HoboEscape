@@ -11,44 +11,43 @@ import java.util.Set;
 public class GameRoom extends Room {
 
 	public static Set<WorldComponent> components;
-	private static double camX = 0;
+	public static double camX = 0;
 	private static Level currentLevel;
 	public static GameRoom staticObject;
-	private static Cycler cycler1, cycler2;
 	
 	public GameRoom() {
 		components = new HashSet<WorldComponent>();
 		staticObject = this;
-		cycler1 = new Cycler();
-		cycler2 = new Cycler(50, 3);
 	}
 
 	@Override
 	public void render(Graphics2D g) {
-		camX = Player.getX() - (Main.WIDTH / 2) + (Player.dx * 10);
+		
+		
+		
+		camX = Player.getX() - Main.WIDTH / 2 + 16;
+		
+		
+		//left bound...
 		camX = camX < 0 ? 0 : camX;
+		//how to right bound?
+		
+		
 		for (WorldComponent worldComponent : components) {
 			worldComponent.paint(g, (int)camX);
 		}
 		
-		//render fog
-
-		// cycler1.render(g);
-		// cycler2.render(g);
 		
 	}
 
 	@Override
 	public void tick() {
 		// check if goals met
-
+		// ... few months later... at some point...
+		
 		for (WorldComponent worldComponent : components) {
 			worldComponent.tick();
 		}
-
-		cycler1.tick();
-		cycler2.tick();
-		
 	}
 
 	@Override

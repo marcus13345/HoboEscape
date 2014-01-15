@@ -61,7 +61,7 @@ public class Levels extends Room implements ButtonListener {
 
 		for (int i = 0; i < buttons.length; i++)
 			buttonSet.addButton(buttons[i]);
-		buttonSet.addButton(new Button(levelsObject, BACK_BUTTON_ID, Color.GRAY, 50, 30, 100, 45, "Back", 20, 11));
+		buttonSet.addButton(new Button(levelsObject, BACK_BUTTON_ID, Main.BUTTON_COLOR, 50, 30, 100, 45, "Back", 20, 11));
 
 		buttonSet.setListener(levelsObject);
 		

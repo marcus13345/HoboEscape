@@ -14,8 +14,9 @@ public class Main {
 	public static final int MULTIPLIER = 1, TILE_RES = 64;
 	public static final int WIDTH = ASPECT_WIDTH * MULTIPLIER * TILE_RES;
 	public static final int HEIGHT = ASPECT_HEIGHT * MULTIPLIER * TILE_RES;
-	public static final Color BACKGROUND_COLOR = new Color(20, 100, 30);
-	public static final Color FOREGROUND_COLOR = new Color(200, 40, 40);
+	public static final Color BACKGROUND_COLOR = new Color(77, 193, 208); //cyan
+	public static final Color FOREGROUND_COLOR = new Color(208, 92, 77); //redish
+	public static final Color BUTTON_COLOR = new Color(208, 92, 77).brighter(); // rgb(193,208,77)
 	public static final Color FONT_COLOR = new Color(0, 0, 0);
 	public static int debug = 0;
 	public static Font BASE_FONT, BASE_FONT_TITLE;

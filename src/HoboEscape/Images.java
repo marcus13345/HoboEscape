@@ -21,7 +21,6 @@ public class Images {
 	private static BufferedImage grassTileset;
 	private static BufferedImage grass, grassLeft, grassRight, dirt, log, tree, grassSingle, bigTree;
 	private static BufferedImage playerSheet, playerMask;
-	private static BufferedImage[] fogs;
 	public static BufferedImage overlayBackground;
 
 	public Images() {
@@ -70,18 +69,6 @@ public class Images {
 			BufferedImage temp = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, new Color(50, 50, 50));
 			overlayBackground = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TRANSLUCENT);
 			overlayBackground.getGraphics().drawImage(temp, 0, 0, Main.WIDTH, Main.HEIGHT, 0, 0, Main.WIDTH, Main.HEIGHT, null);
-			try {
-				fog = ImageIO.read(new File(Main.BASE_DIR + "\\Fog.png"));
-			} catch (Exception e) {
-				fog = getFlat(3000, 3000, 230, 230, 230, 200);
-			}
-			fogs = new BufferedImage[6];
-			for (int i = 0; i < fogs.length; i++) {
-				fogs[i] = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TRANSLUCENT);
-				int x = (int) (Math.random() * (fog.getWidth() - Main.WIDTH));
-				int y = (int) (Math.random() * (fog.getHeight() - Main.HEIGHT));
-				fogs[i].getGraphics().drawImage(fog, 0, 0, Main.WIDTH, Main.HEIGHT, x, y, x + Main.WIDTH, y + Main.HEIGHT, null);
-			}
 
 			System.out.println("here");
 
@@ -108,10 +95,6 @@ public class Images {
 			return bigTree;
 		} else if (texture.equals("player_mask")) {
 			return playerMask;
-		} else if (texture.startsWith("fog")) {
-			texture = texture.replace("fog", "");
-			int i = Integer.parseInt(texture);
-			return fogs[i];
 		} else if (texture.equals("grass_single")) {
 			return grassSingle;
 		}

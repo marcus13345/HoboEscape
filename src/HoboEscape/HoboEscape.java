@@ -15,8 +15,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-public class HoboEscape extends Canvas implements MouseMotionListener,
-		KeyListener, MouseListener {
+public class HoboEscape extends Canvas implements MouseMotionListener, KeyListener, MouseListener {
 
 	private static int mouseX, mouseY;
 	public static boolean mouse = false;
@@ -108,10 +107,8 @@ public class HoboEscape extends Canvas implements MouseMotionListener,
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Main.BACKGROUND_COLOR);
 		g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
-		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
-				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(Images.titleScreenBackground, 0, 0, null);
 
 		// System.out.println(room);
@@ -119,14 +116,14 @@ public class HoboEscape extends Canvas implements MouseMotionListener,
 			room.paint(g2d);
 			// System.out.println(room);
 		} catch (Exception e) {
-			//the underlying background is currently the non splash background. so before the
+			// the underlying background is currently the non splash background.
+			// so before the
 			// splash loads up, the normal color is shown.
 			// here, we change that.
-			
+
 			g2d.setColor(Main.FOREGROUND_COLOR);
 			g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
-			
-			
+
 			// this is expected to happen when we create the window considering
 			// room is null...
 
@@ -139,13 +136,13 @@ public class HoboEscape extends Canvas implements MouseMotionListener,
 			String loading = "Loading";
 			int loopTime = 1000;
 			int dotsInLoop = 4;
-			int dots = ((int)(System.currentTimeMillis() % loopTime))/(loopTime/(dotsInLoop + 1));
-			for(int i = 0; i < dots; i ++) {
-				loading+=".";
+			int dots = ((int) (System.currentTimeMillis() % loopTime)) / (loopTime / (dotsInLoop + 1));
+			for (int i = 0; i < dots; i++) {
+				loading += ".";
 			}
 			g2d.setColor(Main.FONT_COLOR);
 			g2d.drawString(loading, border, Main.HEIGHT - border);
-			
+
 		}
 	}
 
@@ -229,8 +226,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener,
 		if (transition == null) {
 			HoboEscape.room = room;
 		} else {
-			HoboEscape.room = Transition.getTransition(transition,
-					HoboEscape.room, room);
+			HoboEscape.room = Transition.getTransition(transition, HoboEscape.room, room);
 		}
 	}
 

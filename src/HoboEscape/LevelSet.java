@@ -33,7 +33,7 @@ public class LevelSet {
 		
 		for(int i = 0; i < buttons.length; i ++) {
 			boolean active = levels.elementAt(i).unlocked();
-			buttons[i] = new Button(parent, i, Color.GRAY, (int) (leftPadding + (Math.floor(i/(double)rows) * ((int)(buttonSize*buttonWidthRatio) + buttonMargin))), yOffset + (i%rows)*((Main.HEIGHT - topPadding*2 + buttonMargin)/(rows)) + topPadding, (int)(buttonSize*buttonWidthRatio), buttonSize, "" + levels.elementAt(i).getName(), 15, 15, active);
+			buttons[i] = new Button(parent, i, Main.BUTTON_COLOR, (int) (leftPadding + (Math.floor(i/(double)rows) * ((int)(buttonSize*buttonWidthRatio) + buttonMargin))), yOffset + (i%rows)*((Main.HEIGHT - topPadding*2 + buttonMargin)/(rows)) + topPadding, (int)(buttonSize*buttonWidthRatio), buttonSize, "" + levels.elementAt(i).getName(), 15, 15, active);
 		}
 		
 		return buttons;

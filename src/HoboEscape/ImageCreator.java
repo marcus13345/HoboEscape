@@ -87,11 +87,11 @@ public class ImageCreator {
 	}
 	
 	public static BufferedImage createImageCloud(int width, int height, int color) {
-		return createImageCloud(width, height, 0xFF&(color>>16), 0xFF&(color>>8), 0xFF&(color));
+		return createImageCloud(width, height, 0x000000FF&(color>>16), 0x000000FF&(color>>8), 0x000000FF&(color));
 	}
 
 	public static BufferedImage createImageCloud(int width, int height, int r, int g, int b) {
-		return createImageCloud(width, height, r/255d, r/255d, b/255d);
+		return createImageCloud(width, height, r/255d, g/255d, b/255d);
 	}
 
 	public static BufferedImage createImageCloud(int width, int height, double Rx, double Gx, double Bx) {

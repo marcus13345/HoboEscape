@@ -13,7 +13,7 @@ public class OptionsRoom extends Room implements ButtonListener {
 	public OptionsRoom(Room previous) {
 		this.previous = previous;
 		buttons = new ButtonSet();
-		buttons.addButton(new Button(this, 0, new Color(191, 179, 145), 0, 0, 200, 50, "Sound: " + (Globals.sound ? "On" : "Off"), 0, 0));
+		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 0, 0, 200, 50, "Sound: " + (Globals.sound ? "On" : "Off"), 0, 0));
 		buttons.setListener(this);
 		
 	}

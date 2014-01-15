@@ -28,10 +28,10 @@ public class Menu extends Room implements ButtonListener{
 		titleX = 0;
 		desiredTitleX = (Main.WIDTH / 2) - (Images.title.getWidth(null) / 2) + TITLE_OFFSET;
 		buttons = new Button[4];
-		buttons[0] = new Button(this, 0, vary(Main.FOREGROUND_COLOR, 2), Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Play", 10, 10);
-		buttons[1] = new Button(this, 1, vary(Main.FOREGROUND_COLOR, 2), Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Options", 10, 10);
-		buttons[2] = new Button(this, 2, vary(Main.FOREGROUND_COLOR, 2), Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Credits", 10, 10);
-		buttons[3] = new Button(this, 3, vary(Main.FOREGROUND_COLOR, 2), Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Quit", 10, 10);
+		buttons[0] = new Button(this, 0, Main.BUTTON_COLOR, Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Play", 10, 10);
+		buttons[1] = new Button(this, 1, Main.BUTTON_COLOR, Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Options", 10, 10);
+		buttons[2] = new Button(this, 2, Main.BUTTON_COLOR, Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Credits", 10, 10);
+		buttons[3] = new Button(this, 3, Main.BUTTON_COLOR, Main.WIDTH, Main.HEIGHT, BUTTON_WIDTH, 40, "Quit", 10, 10);
 		
 		buttonSet = new ButtonSet();
 
