@@ -33,8 +33,8 @@ public class GameRoom extends Room {
 		
 		//render fog
 
-		cycler1.render(g);
-		cycler2.render(g);
+		// cycler1.render(g);
+		// cycler2.render(g);
 		
 	}
 

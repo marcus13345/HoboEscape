@@ -14,8 +14,9 @@ public class Main {
 	public static final int MULTIPLIER = 1, TILE_RES = 64;
 	public static final int WIDTH = ASPECT_WIDTH * MULTIPLIER * TILE_RES;
 	public static final int HEIGHT = ASPECT_HEIGHT * MULTIPLIER * TILE_RES;
-	public static final Color BACKGROUND_COLOR = new Color(30, 30, 30);
-	public static final Color FOREGROUND_COLOR = new Color(214, 167, 32);
+	public static final Color BACKGROUND_COLOR = new Color(20, 100, 30);
+	public static final Color FOREGROUND_COLOR = new Color(200, 40, 40);
+	public static final Color FONT_COLOR = new Color(0, 0, 0);
 	public static int debug = 0;
 	public static Font BASE_FONT, BASE_FONT_TITLE;
 	private static final double DIAGONAL = Math.sqrt(Math.pow(WIDTH, 2) + Math.pow(HEIGHT, 2)) / 1174.8838240438924;
@@ -29,8 +30,8 @@ public class Main {
 			BASE_FONT_TITLE = BASE_FONT.deriveFont(Font.BOLD, 62);
 			System.out.println(DIAGONAL);
 		} catch(Exception e) {
-			e.printStackTrace();
-			System.exit(2);
+			BASE_FONT = new Font("Tahoma", Font.PLAIN, 30);
+			BASE_FONT_TITLE = new Font("Tahoma", Font.BOLD, 62);
 		}
 		new HoboEscape();
 	}

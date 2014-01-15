@@ -6,7 +6,6 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
@@ -27,17 +26,31 @@ public class Images {
 
 	public Images() {
 		try {
-			logo = ImageIO.read(new File(Main.BASE_DIR + "Logo.png"));
-			title = ImageIO.read(new File(Main.BASE_DIR + "Title.png"));
-			paused = ImageIO.read(new File(Main.BASE_DIR + "Paused.png"));
-			title = ImageCreator.getScaledImage(title, 0.6d);
-			logo = ImageCreator.getScaledImage(logo, 0.6d);
-			paused = ImageCreator.getScaledImage(paused, 0.7d);
-
-			splashBackground = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.FOREGROUND_COLOR, Color.YELLOW);
+			splashBackground = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.FOREGROUND_COLOR);
 			titleScreenBackground = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
-			grassTileset = ImageIO.read(new File(Main.BASE_DIR + "Tilesets\\BaseTileset.png"));
-			playerSheet = ImageIO.read(new File(Main.BASE_DIR + "Tilesets\\PlayerSheet.png"));
+			try {
+				logo = ImageIO.read(new File(Main.BASE_DIR + "Logo.png"));
+				title = ImageIO.read(new File(Main.BASE_DIR + "Title.png"));
+				paused = ImageIO.read(new File(Main.BASE_DIR + "Paused.png"));
+				title = ImageCreator.getScaledImage(title, 0.6d);
+				logo = ImageCreator.getScaledImage(logo, 0.6d);
+				paused = ImageCreator.getScaledImage(paused, 0.7d);
+			} catch (Exception e) {
+				logo = getFlat(200, 50, 50, 50, 50, 255);
+				title = getFlat(200, 50, 50, 50, 50, 255);
+				paused = getFlat(200, 50, 50, 50, 50, 255);
+			}
+			try {
+				grassTileset = ImageIO.read(new File(Main.BASE_DIR + "Tilesets\\BaseTileset.png"));
+			} catch (Exception e) {
+				grassTileset = getFlat(5 * 64, 7 * 64, 20, 150, 10, 255);
+			}
+
+			try {
+				playerSheet = ImageIO.read(new File(Main.BASE_DIR + "Tilesets\\PlayerSheet.png"));
+			} catch (Exception e) {
+				playerSheet = getFlat(32, 48, 50, 50, 50, 255);
+			}
 			// cloudSheet = ImageIO.read(new File(HoboEscape.BASE_DIR +
 			// "Tilesets\\CloudSheet.png"));
 
@@ -49,6 +62,7 @@ public class Images {
 			tree = createTile(grassTileset, 64, 1, 0, 1, 1);
 			grassSingle = createTile(grassTileset, 64, 7, 1, 1, 1);
 			bigTree = createTile(grassTileset, 64, 0, 4, 3, 3);
+			
 
 			playerMask = createTile(playerSheet, 32, 48, 0, 0, 1, 1);
 			// clouds[0] = createTile(64, 64, );
@@ -56,16 +70,21 @@ public class Images {
 			BufferedImage temp = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, new Color(50, 50, 50));
 			overlayBackground = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TRANSLUCENT);
 			overlayBackground.getGraphics().drawImage(temp, 0, 0, Main.WIDTH, Main.HEIGHT, 0, 0, Main.WIDTH, Main.HEIGHT, null);
-
-			fog = ImageIO.read(new File(Main.BASE_DIR + "\\Fog.png"));
+			try {
+				fog = ImageIO.read(new File(Main.BASE_DIR + "\\Fog.png"));
+			} catch (Exception e) {
+				fog = getFlat(3000, 3000, 230, 230, 230, 200);
+			}
 			fogs = new BufferedImage[6];
-			for(int i = 0; i < fogs.length; i ++) {
+			for (int i = 0; i < fogs.length; i++) {
 				fogs[i] = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TRANSLUCENT);
-				int x = (int)(Math.random() * (fog.getWidth() - Main.WIDTH));
-				int y = (int)(Math.random() * (fog.getHeight() - Main.HEIGHT));
+				int x = (int) (Math.random() * (fog.getWidth() - Main.WIDTH));
+				int y = (int) (Math.random() * (fog.getHeight() - Main.HEIGHT));
 				fogs[i].getGraphics().drawImage(fog, 0, 0, Main.WIDTH, Main.HEIGHT, x, y, x + Main.WIDTH, y + Main.HEIGHT, null);
 			}
-			
+
+			System.out.println("here");
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.exit(1);
@@ -123,5 +142,14 @@ public class Images {
 		AffineTransformOp bilinearScaleOp = new AffineTransformOp(scaleTransform, AffineTransformOp.TYPE_BILINEAR);
 
 		return bilinearScaleOp.filter(image, new BufferedImage(width, height, image.getType()));
+	}
+
+	public static BufferedImage getFlat(int width, int height, int r, int g, int b, int a) {
+		Color c = new Color(r, g, b, a);
+		BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_4BYTE_ABGR);
+		Graphics graphics = image.getGraphics();
+		graphics.setColor(c);
+		graphics.fillRect(0, 0, width, height);
+		return image;
 	}
 }

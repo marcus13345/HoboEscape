@@ -7,7 +7,6 @@ import java.util.Stack;
 
 public class LevelSet {
 
-	private static final String directory = "C:\\MAndWorks\\HoboEscape\\Levels\\";
 	private static Stack<Level> levels;
 	private static final int 
 			rows = 6, 

@@ -1,6 +1,7 @@
 package HoboEscape;
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,27 +15,18 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
-public class HoboEscape extends Canvas implements MouseMotionListener, KeyListener, MouseListener {
+public class HoboEscape extends Canvas implements MouseMotionListener,
+		KeyListener, MouseListener {
 
 	private static int mouseX, mouseY;
 	public static boolean mouse = false;
 	public static Room room;
 	public static boolean[] keyCodes, keyChars;
+	private static boolean initialized = false;
+	private static double GraphicalLoadingBar = 0;
+	private static int totalToLoad = 0, loaded = 0;
 
 	public HoboEscape() {
-
-		Variable.setBaseDir(Main.BASE_DIR);
-
-		keyCodes = new boolean[512];
-		for (int i = 0; i < keyCodes.length; i++) {
-			keyCodes[i] = false;
-		}
-		keyChars = new boolean[512];
-		for (int i = 0; i < keyChars.length; i++) {
-			keyChars[i] = false;
-		}
-
-		new Images();
 
 		// do initialization stuff for the window... ew
 		setSize(Main.WIDTH, Main.HEIGHT);
@@ -50,31 +42,44 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		addMouseListener(this);
 		// shut up, it works, i don't care if it makes no sense.
 
-		// initialize a new opengl window
+		new Thread(new Runnable() {
+			public void run() {
 
-//		try {
-//			Display.setDisplayMode(new DisplayMode(Main.WIDTH, Main.HEIGHT));
-//			Display.setTitle("Hobo Escape");
-//			Display.create();
-//			// Display.setResizable(false);
-//		} catch (LWJGLException e) {
-//			System.exit(13345);
-//		}
+				Variable.setBaseDir(Main.BASE_DIR);
 
-		// initializes the rooms static objects...
-		new SplashScreen();
-		new Menu();
-		new Levels();
-		new GameRoom();
-		/*
-		 * setRoom(GameRoom.staticObject); GameRoom.setLevel(new Level(1));
-		 */
-		setRoom(SplashScreen.staticObject);
+				keyCodes = new boolean[512];
+				for (int i = 0; i < keyCodes.length; i++) {
+					keyCodes[i] = false;
+				}
+				keyChars = new boolean[512];
+				for (int i = 0; i < keyChars.length; i++) {
+					keyChars[i] = false;
+				}
 
-		//setRoom(GameRoom.staticObject);
-		//GameRoom.setLevel(new Level(1));
+				new Images();
 
-		while (/*!(Display.isCloseRequested())*/ true) {
+				// initializes the rooms static objects...
+				new SplashScreen();
+				new Menu();
+				new Levels();
+				new GameRoom();
+				setRoom(SplashScreen.staticObject);
+
+				// setRoom(GameRoom.staticObject);
+				// GameRoom.setLevel(new Level(1));
+				initialized = true;
+
+			}
+		}).start();
+		while (!initialized) {
+			try {
+				Thread.sleep(100);
+			} catch (Exception e) {
+
+			}
+			repaint();
+		}
+		while (/* !(Display.isCloseRequested()) */true) {
 			tick();
 			repaint();
 			try {
@@ -82,8 +87,8 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			} catch (Exception e) {
 
 			}
-			//Display.update();
-			//Display.sync(30);
+			// Display.update();
+			// Display.sync(30);
 		}
 		// System.exit(0);
 	}
@@ -103,8 +108,10 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Main.BACKGROUND_COLOR);
 		g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
-		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+				RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(Images.titleScreenBackground, 0, 0, null);
 
 		// System.out.println(room);
@@ -112,6 +119,14 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			room.paint(g2d);
 			// System.out.println(room);
 		} catch (Exception e) {
+			//the underlying background is currently the non splash background. so before the
+			// splash loads up, the normal color is shown.
+			// here, we change that.
+			
+			g2d.setColor(Main.FOREGROUND_COLOR);
+			g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
+			
+			
 			// this is expected to happen when we create the window considering
 			// room is null...
 
@@ -119,8 +134,18 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			// is the blue background...
 
 			g2d.drawImage(Images.splashBackground, 0, 0, null);
-			g2d.setFont(Main.BASE_FONT_TITLE);
-			g2d.drawString("Loading...", 0, Main.HEIGHT - 100);
+			g2d.setFont(Main.BASE_FONT);
+			int border = 10;
+			String loading = "Loading";
+			int loopTime = 1000;
+			int dotsInLoop = 4;
+			int dots = ((int)(System.currentTimeMillis() % loopTime))/(loopTime/(dotsInLoop + 1));
+			for(int i = 0; i < dots; i ++) {
+				loading+=".";
+			}
+			g2d.setColor(Main.FONT_COLOR);
+			g2d.drawString(loading, border, Main.HEIGHT - border);
+			
 		}
 	}
 
@@ -204,7 +229,8 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		if (transition == null) {
 			HoboEscape.room = room;
 		} else {
-			HoboEscape.room = Transition.getTransition(transition, HoboEscape.room, room);
+			HoboEscape.room = Transition.getTransition(transition,
+					HoboEscape.room, room);
 		}
 	}
 
