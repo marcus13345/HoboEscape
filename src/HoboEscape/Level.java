@@ -14,8 +14,6 @@ public class Level {
 	private String varPath;
 	private String fullPath;
 
-	private int rightBound;
-	
 	public Level(int id) {
 		varPath = "Levels\\" + id;
 		fullPath = Main.BASE_DIR + "Levels\\" + id;
@@ -70,10 +68,6 @@ public class Level {
 					} else if(data.equals("player")) {
 						components.add(new Player(x*Main.TILE_RES, y*Main.TILE_RES));
 					}
-				} else if (type.equals("meta")) {
-					if(data.equals("dimensions")) {
-						rightBound = x * Main.TILE_RES;
-					}
 				}
 			}
 
@@ -91,9 +85,5 @@ public class Level {
 
 	public boolean exists() {
 		return exists;
-	}
-	
-	public int getRightBound() {
-		return rightBound;
 	}
 }

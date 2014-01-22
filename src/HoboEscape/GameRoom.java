@@ -31,7 +31,7 @@ public class GameRoom extends Room {
 		//left bound...
 		camX = camX < 0 ? 0 : camX;
 		//how to right bound?
-		camX = camX > currentLevel.getRightBound() - Main.WIDTH ? currentLevel.getRightBound() - Main.WIDTH : camX;
+		
 		
 		for (WorldComponent worldComponent : components) {
 			worldComponent.paint(g, (int)camX);
