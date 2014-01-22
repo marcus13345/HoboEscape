@@ -37,9 +37,9 @@ public class Button {
 		hover = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
 		down = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
 
-		normal = ImageCreator.createImageCloud(width, height, c);
-		hover = ImageCreator.createImageCloud(width, height, c.brighter());
-		down = ImageCreator.createImageCloud(width, height, c.darker());
+		normal = ImageCreator.creatImageColorWithNoise(width, height, c, 2);
+		hover = ImageCreator.creatImageColorWithNoise(width, height, c.brighter(), 2);
+		down = ImageCreator.creatImageColorWithNoise(width, height, c.darker(), 2);
 
 		this.text = text;
 		this.leftPadding = leftPadding;
