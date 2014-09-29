@@ -4,9 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 
-import javax.imageio.ImageIO;
-
-
 public class Main {
 	
 	public static final int ASPECT_WIDTH = 16;

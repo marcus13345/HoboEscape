@@ -10,12 +10,10 @@ public class Levels extends Room implements ButtonListener {
 	private static ButtonSet buttonSet;
 	private static LevelSet levelSet;
 	private static Levels levelsObject;
-	public static Room staticObject;
 	private static final int BACK_BUTTON_ID = -1;
 
 	public Levels() {
 		levelsObject = this;
-		staticObject = this;
 		rescanButtons();
 	}
 
@@ -43,11 +41,11 @@ public class Levels extends Room implements ButtonListener {
 	@Override
 	public void click(String name, int id) {
 		if(id == BACK_BUTTON_ID) {
-			HoboEscape.setRoom(Menu.staticObject, "panLeft");
+			HoboEscape.popRoom("panLeft");
 			return;
 		}
 		GameRoom.setLevel(levelSet.getLevel(id));
-		HoboEscape.setRoom(GameRoom.staticObject, "panDown");
+		HoboEscape.pushRoom(Room.GAME_ROOM, "panDown");
 	}
 
 	public static void rescanButtons() {
@@ -69,4 +67,7 @@ public class Levels extends Room implements ButtonListener {
 		
 	}
 
+	public String toString() {
+		return "LevelSelect";
+	}
 }

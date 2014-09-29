@@ -32,6 +32,7 @@ public class Cycler {
 	}
 	
 	public void render(Graphics2D g) {
+		//lulmath
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)(        (Math.sin(Math.PI * (time / (float)MAX_TIME))*1.5) > 1 ? 1 : (Math.sin(Math.PI * (time / (float)MAX_TIME))*1.5)         ));
 		g.setComposite(composite);
 		g.drawImage(images[pointer], 0, 0, null);

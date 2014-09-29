@@ -2,9 +2,8 @@ package HoboEscape;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
 
 public class Level {
 	private String name;
@@ -27,8 +26,8 @@ public class Level {
 		}
 	}
 
-	public Set<WorldComponent> parseComponents(String room) {
-		Set<WorldComponent> components = new HashSet<WorldComponent>();
+	public ArrayList<WorldComponent> parseComponents(String room) {
+		ArrayList<WorldComponent> components = new ArrayList<WorldComponent>();
 		File file = new File(fullPath + "\\" + room + ".lvl");
 		Scanner scanner = null;
 		try {
@@ -41,18 +40,26 @@ public class Level {
 		String data = "";
 		while (scanner.hasNextLine()) {
 			String str = scanner.nextLine();
+			if (str.startsWith("#"))
+				continue;
+			
 			str = str.replace(" ", "").replace(";", "").toLowerCase();
-			if (str.startsWith("#")) {
-				// ignore this line because derp
-			} else if (str.startsWith("x=")) {
-				x = Integer.parseInt(str.substring(2));
-			} else if (str.startsWith("y=")) {
-				y = Integer.parseInt(str.substring(2));
-			} else if (str.startsWith("data=")) {
-				data = str.substring(5);
-			} else if (str.startsWith("type=")) {
-				type = str.substring(5);
-			} else if (str.equals("apply")) {
+			
+			String[] parts = str.split("=");
+			switch(parts[0]) {
+			case "x":
+				x = Integer.parseInt(parts[1]);
+				break;
+			case "y":
+				y = Integer.parseInt(parts[1]);
+				break;
+			case "data":
+				data = parts[1];
+				break;
+			case "type":
+				type = parts[1];
+				break;
+			case "apply":
 				System.out.print("Type: " + type + "\n" + "Data: " + data + "\n" + "X:    " + x + "\n" + "Y:    " + y + "\n\n");
 				if (type.equals("tile")) {
 					components.add(new WorldComponent(x * Main.TILE_RES, y * Main.TILE_RES, Images.getTexture(data), true));
@@ -69,9 +76,14 @@ public class Level {
 						components.add(new Player(x*Main.TILE_RES, y*Main.TILE_RES));
 					}
 				}
+				
+				break;
+				
 			}
-
+			
 		}
+		scanner.close();
+		
 		return components;
 	}
 

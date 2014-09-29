@@ -1,9 +1,7 @@
 package HoboEscape;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 
 public class Transition extends Room {
 
@@ -63,7 +61,7 @@ public class Transition extends Room {
 	public void finish() {
 		roomFrom.setPos(0, 0);
 		roomTo.setPos(0, 0);
-		HoboEscape.setRoom(roomTo);
+		HoboEscape.popRoom(null);
 	}
 
 	public static Room getTransition(String transition, Room from, Room to) {
@@ -80,7 +78,7 @@ public class Transition extends Room {
 	}
 	
 	public String toString() {
-		return "" + roomFrom + " -> " + roomTo;
+		return "[" + roomFrom + " -> " + roomTo + "]";
 	}
 
 }

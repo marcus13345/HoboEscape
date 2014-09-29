@@ -1,6 +1,5 @@
 package HoboEscape;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
@@ -8,11 +7,9 @@ import java.awt.event.KeyEvent;
 public class PauseMenu extends Room implements ButtonListener{
 
 	private ButtonSet buttons;
-	private Room previous;
 	
-	public PauseMenu(Room previous) {
+	public PauseMenu() {
 		//super(under);
-		this.previous = previous;
 		buttons = new ButtonSet();
 		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 100, 200, 50, "Resume", 20, 10));
 		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 100, 170, 200, 50, "Options", 20, 10));
@@ -37,7 +34,7 @@ public class PauseMenu extends Room implements ButtonListener{
 			//resume button...
 			finish();
 		}else if(id == 1) {
-			HoboEscape.setRoom(new OptionsRoom(this), "PanLeft");
+			HoboEscape.pushRoom(Room.OPTIONS_ROOM, "PanLeft");
 		}
 	}
 
@@ -57,6 +54,6 @@ public class PauseMenu extends Room implements ButtonListener{
 	}
 	
 	private void finish() {
-		HoboEscape.setRoom(previous, "panDown");
+		HoboEscape.popRoom("panDown");
 	}
 }

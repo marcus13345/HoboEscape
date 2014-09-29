@@ -10,11 +10,6 @@ public class SplashScreen extends Room {
 	private final static int TIME_OFFSET = 60;
 	private static int time = 0 - TIME_OFFSET;
 	private static double textTime = 0 - (Math.PI / 2);
-	public static Room staticObject;
-	
-	public SplashScreen() {
-		staticObject = this;
-	}
 	
 	@Override
 	public void render(Graphics2D g) {
@@ -45,13 +40,13 @@ public class SplashScreen extends Room {
 		time ++;
 		textTime += Math.PI / (TIME_OFFSET + maxTime);
 		if(time > maxTime) {
-			HoboEscape.setRoom(Menu.staticObject);
+			HoboEscape.pushRoom(Room.MENU, null);
 		}
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		HoboEscape.setRoom(Menu.staticObject);
+		HoboEscape.pushRoom(Room.MENU, null);
 		Menu.stopAnimation();
 	}
 

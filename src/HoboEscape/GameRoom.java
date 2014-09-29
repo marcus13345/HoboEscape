@@ -1,23 +1,18 @@
 package HoboEscape;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 
 public class GameRoom extends Room {
 
-	public static Set<WorldComponent> components;
+	public static ArrayList<WorldComponent> components;
 	public static double camX = 0;
 	private static Level currentLevel;
-	public static GameRoom staticObject;
 	
 	public GameRoom() {
-		components = new HashSet<WorldComponent>();
-		staticObject = this;
+		components = new ArrayList<WorldComponent>();
 	}
 
 	@Override
@@ -53,7 +48,7 @@ public class GameRoom extends Room {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			HoboEscape.setRoom(new PauseMenu(staticObject), "panUp");
+			HoboEscape.pushRoom(Room.PAUSE_MENU, "panUp");
 		}
 	}
 
@@ -79,5 +74,9 @@ public class GameRoom extends Room {
 			collidable |= component.collidableAt(x, y);
 		}
 		return collidable;
+	}
+
+	public String toString() {
+		return "GameRoom";
 	}
 }

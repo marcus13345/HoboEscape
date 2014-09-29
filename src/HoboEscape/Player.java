@@ -1,6 +1,5 @@
 package HoboEscape;
 
-import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 /**
@@ -135,6 +134,8 @@ public class Player extends WorldComponent {
 			final double yBefore = y, xBefore = x, newY, newX;
 			int dy = 0, dx = 0;
 
+			//TODO make this entire place better. its like super inefficient...
+			
 			calculateTestPoints();
 			while ((flags & 0b00000001) != 0b00000000) {
 				y--;

@@ -1,6 +1,5 @@
 package HoboEscape;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
@@ -8,16 +7,14 @@ import java.awt.event.KeyEvent;
 public class OptionsRoom extends Room implements ButtonListener {
 	
 	private ButtonSet buttons;
-	private Room previous;
 	
-	public OptionsRoom(Room previous) {
-		this.previous = previous;
+	public OptionsRoom() {
 		buttons = new ButtonSet();
 		buttons.addButton(new Button(this, 0, Main.BUTTON_COLOR, 0, 0, 200, 50, "Sound: " + (Globals.sound ? "On" : "Off"), 0, 0));
 		buttons.setListener(this);
 		
 	}
-	
+
 	@Override
 	protected void render(Graphics2D g) {
 		

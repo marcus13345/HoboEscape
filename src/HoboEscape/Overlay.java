@@ -43,7 +43,7 @@ public abstract class Overlay extends Room{
 
 	
 	protected void finish() {
-		HoboEscape.setRoom(under);
+		HoboEscape.popRoom(null);
 	}
 
 }

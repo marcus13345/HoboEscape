@@ -10,6 +10,7 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Images {
+	public static BufferedImage NO_TEXTURE;
 	public static BufferedImage logo;
 	public static BufferedImage title;
 	public static BufferedImage splashBackground;
@@ -19,21 +20,29 @@ public class Images {
 
 	// tilesets
 	private static BufferedImage grassTileset;
+	
+	// blocks of sorts
 	private static BufferedImage grass, grassLeft, grassRight, dirt, log, tree, grassSingle, bigTree;
+	
+	
 	private static BufferedImage playerSheet, playerMask;
 	public static BufferedImage overlayBackground;
 
 	public Images() {
 		try {
-			splashBackground = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.FOREGROUND_COLOR);
-			titleScreenBackground = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
+			
+			long startTime = System.currentTimeMillis();
+			
+			System.out.println("Creating textures...");
+			splashBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
+			titleScreenBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
 			try {
 				logo = ImageIO.read(new File(Main.BASE_DIR + "Logo.png"));
 				title = ImageIO.read(new File(Main.BASE_DIR + "Title.png"));
 				paused = ImageIO.read(new File(Main.BASE_DIR + "Paused.png"));
-				title = ImageCreator.getScaledImage(title, 0.6d);
-				logo = ImageCreator.getScaledImage(logo, 0.6d);
-				paused = ImageCreator.getScaledImage(paused, 0.7d);
+				title = ImageHelper.getScaledImage(title, 0.6d);
+				logo = ImageHelper.getScaledImage(logo, 0.6d);
+				paused = ImageHelper.getScaledImage(paused, 0.7d);
 			} catch (Exception e) {
 				logo = getFlat(200, 50, 50, 50, 50, 255);
 				title = getFlat(200, 50, 50, 50, 50, 255);
@@ -63,14 +72,17 @@ public class Images {
 			bigTree = createTile(grassTileset, 64, 0, 4, 3, 3);
 			
 
-			playerMask = createTile(playerSheet, 32, 48, 0, 0, 1, 1);
+			// playerMask = createTile(playerSheet, 32, 48, 0, 0, 1, 1);
+			playerMask = tree;
 			// clouds[0] = createTile(64, 64, );
 
-			BufferedImage temp = ImageCreator.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, new Color(50, 50, 50));
+			BufferedImage temp = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, new Color(50, 50, 50));
 			overlayBackground = new BufferedImage(Main.WIDTH, Main.HEIGHT, BufferedImage.TRANSLUCENT);
 			overlayBackground.getGraphics().drawImage(temp, 0, 0, Main.WIDTH, Main.HEIGHT, 0, 0, Main.WIDTH, Main.HEIGHT, null);
 
-			System.out.println("here");
+			NO_TEXTURE = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+			
+			System.out.println("finished creating textures! (" + (System.currentTimeMillis() - startTime) + "ms)");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -79,26 +91,28 @@ public class Images {
 	}
 
 	public static BufferedImage getTexture(String texture) {
-		if (texture.equals("grass")) {
+		switch(texture) {
+		case "grass":
 			return grass;
-		} else if (texture.equals("grass_left")) {
+		case "grassLeft":
 			return grassLeft;
-		} else if (texture.equals("grass_right")) {
+		case "grassRight":
 			return grassRight;
-		} else if (texture.equals("dirt")) {
+		case "dirt":
 			return dirt;
-		} else if (texture.equals("log")) {
+		case "log":
 			return log;
-		} else if (texture.equals("tree")) {
+		case "tree":
 			return tree;
-		} else if (texture.equals("big_tree")) {
+		case "bigTree":
 			return bigTree;
-		} else if (texture.equals("player_mask")) {
+		case "player_mask":
 			return playerMask;
-		} else if (texture.equals("grass_single")) {
+		case "grassSingle":
 			return grassSingle;
+		default:
+			return null;
 		}
-		return null;
 	}
 
 	private static BufferedImage createTile(BufferedImage tileset, int tileRes, int x, int y, int width, int height) {

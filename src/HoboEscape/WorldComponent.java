@@ -2,14 +2,15 @@ package HoboEscape;
 
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
 
 public class WorldComponent {
 	protected double x, y, width, height;
 	protected Image texture;
 	private boolean alive;
 	private final boolean collidable;
-
+	
+	public static final Player player = new Player(0, 0);
+	
 	public WorldComponent(int x, int y, Image texture, boolean collidable) {
 		this.x = x;
 		this.y = y;
@@ -25,6 +26,9 @@ public class WorldComponent {
 	 * should always override this.
 	 * 
 	 * basically, don't listen to that guy ^^
+	 * wait, why?
+	 * 
+	 * oh i get it, it just calls the thing, you need to implement it youself. if you feel like it.
 	 * 
 	 * @param g
 	 * @param camX
@@ -34,7 +38,13 @@ public class WorldComponent {
 	}
 
 	protected void render(Graphics2D g, int camX) {
-		g.drawImage(texture, (int)x - camX, (int)y, null);
+		if(texture == null)
+			g.drawImage(texture, (int)x - camX, (int)y, null);
+		else
+			g.drawImage(Images.NO_TEXTURE, 0, 0, null);
+		
+		
+		
 	}
 
 	public void tick() {

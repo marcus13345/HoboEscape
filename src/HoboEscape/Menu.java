@@ -3,10 +3,6 @@ package HoboEscape;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 public class Menu extends Room implements ButtonListener{
 	private static double titleX, desiredTitleX;
@@ -15,12 +11,8 @@ public class Menu extends Room implements ButtonListener{
 	private static ButtonSet buttonSet;
 	private static Button[] buttons;
 	private static final int BUTTON_WIDTH = 200;
-	private static boolean exitingRoom = false;
-	private static int outTime = 0;
-	public static Room staticObject;
 	
 	public Menu() {
-		staticObject = this;
 		
 		buttonTimeOffset = 20;
 		buttonTime = 0 - buttonTimeOffset;
@@ -81,6 +73,7 @@ public class Menu extends Room implements ButtonListener{
 		
 	}
 	
+	@SuppressWarnings("unused")
 	private Color vary(Color c, int k) {
 		
 		double r = c.getRed();
@@ -105,7 +98,7 @@ public class Menu extends Room implements ButtonListener{
 	@Override
 	public void click(String name, int id) {
 		if(id == 0) {
-			HoboEscape.setRoom(Levels.staticObject, "panRight");
+			HoboEscape.pushRoom(Room.LEVELS, "panRight");
 		}
 	}
 
@@ -114,4 +107,7 @@ public class Menu extends Room implements ButtonListener{
 		buttonTime = 20;
 	}
 
+	public String toString() {
+		return "Menu";
+	}
 }

@@ -2,6 +2,7 @@ package HoboEscape;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -12,18 +13,21 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.util.Stack;
 
 import javax.swing.JFrame;
 
 public class HoboEscape extends Canvas implements MouseMotionListener, KeyListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static int mouseX, mouseY;
 	public static boolean mouse = false;
-	public static Room room;
+	public static Stack<Room> room;
 	public static boolean[] keyCodes, keyChars;
 	private static boolean initialized = false;
-	private static double GraphicalLoadingBar = 0;
-	private static int totalToLoad = 0, loaded = 0;
 
 	public HoboEscape() {
 
@@ -41,6 +45,8 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		addMouseListener(this);
 		// shut up, it works, i don't care if it makes no sense.
 
+		room = new Stack<Room>();
+		
 		new Thread(new Runnable() {
 			public void run() {
 
@@ -57,15 +63,8 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 
 				new Images();
 
-				// initializes the rooms static objects...
-				new SplashScreen();
-				new Menu();
-				new Levels();
-				new GameRoom();
-				setRoom(SplashScreen.staticObject);
+				pushRoom(Room.SPLASH_SCREEN, null);
 
-				// setRoom(GameRoom.staticObject);
-				// GameRoom.setLevel(new Level(1));
 				initialized = true;
 
 			}
@@ -80,6 +79,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		}
 		while (/* !(Display.isCloseRequested()) */true) {
 			tick();
+			
 			repaint();
 			try {
 				Thread.sleep(17);
@@ -93,7 +93,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	}
 
 	private void tick() {
-		room.tick();
+		room.peek().tick();
 	}
 
 	public void update(Graphics g) {
@@ -113,7 +113,19 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 
 		// System.out.println(room);
 		try {
-			room.paint(g2d);
+			room.peek().paint(g2d);
+			int size = room.size();
+			int i = 0;
+			String str = "";
+			for(Room r : room) {
+				str += "" + r.toString() + (i != size - 1 ? " -> " : "");
+				i ++;
+			}
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, Main.WIDTH, 30);
+			g.setColor(Color.BLACK);
+			g.drawString(str, 10, 21);
 			// System.out.println(room);
 		} catch (Exception e) {
 			// the underlying background is currently the non splash background.
@@ -121,7 +133,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			// splash loads up, the normal color is shown.
 			// here, we change that.
 
-			g2d.setColor(Main.FOREGROUND_COLOR);
+			g2d.setColor(Main.BACKGROUND_COLOR);
 			g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
 
 			// this is expected to happen when we create the window considering
@@ -148,7 +160,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		room.keyPressed(e);
+		room.peek().keyPressed(e);
 		keyCodes[(int) e.getKeyCode()] = true;
 		keyChars[(int) e.getKeyChar()] = true;
 	}
@@ -222,11 +234,12 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	 * @param room
 	 * @param transition
 	 */
-	public static void setRoom(Room room, String transition) {
+	public static void pushRoom(Room room, String transition) {
 		if (transition == null) {
-			HoboEscape.room = room;
+			HoboEscape.room.push(room);
 		} else {
-			HoboEscape.room = Transition.getTransition(transition, HoboEscape.room, room);
+			pushRoom(room, null);
+			HoboEscape.room.push(Transition.getTransition(transition, HoboEscape.room.elementAt(HoboEscape.room.size() - 2), room));
 		}
 	}
 
@@ -236,7 +249,21 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	 * @param room
 	 * @param transition
 	 */
-	public static void setRoom(Room room) {
-		setRoom(room, null);
+	
+	public static void setRoom(Room room, String transition) {
+		if(transition == null) {
+			HoboEscape.room.set(HoboEscape.room.size() - 1, room);
+		}else {
+			HoboEscape.room.set(HoboEscape.room.size() - 1, (Transition.getTransition(transition, HoboEscape.room.peek(), room)));
+		}
+	}
+
+	public static void popRoom(String string) {
+		if(string == null)
+			room.pop();
+		else {
+			setRoom(HoboEscape.room.elementAt(HoboEscape.room.size() - 2), string);
+			//TODO yeah the transition thing...
+		}
 	}
 }
