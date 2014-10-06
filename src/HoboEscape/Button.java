@@ -52,8 +52,6 @@ public class Button {
 
 	public void poll() {
 
-		if (Main.debug > 1)
-			System.out.println("" + clickLevel);
 		if (active) {
 			// figure out the new click level of the button and add a click if
 			// we clicked it

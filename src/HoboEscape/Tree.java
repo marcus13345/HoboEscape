@@ -46,7 +46,6 @@ public class Tree extends WorldComponent {
 			y = (int) y;
 		}
 		
-		System.out.println("animation: " + animation + "\nanimationTime: " + animationTime);
 		animationTime++;
 		switch (animation) {
 		case RIGHT:

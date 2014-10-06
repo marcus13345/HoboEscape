@@ -26,7 +26,6 @@ public class Main {
 		try {
 			BASE_FONT = Font.createFont(Font.TRUETYPE_FONT, new File(Main.BASE_DIR + "Neucha.ttf")).deriveFont(Font.BOLD, 30);
 			BASE_FONT_TITLE = BASE_FONT.deriveFont(Font.BOLD, 62);
-			System.out.println(DIAGONAL);
 		} catch(Exception e) {
 			BASE_FONT = new Font("Tahoma", Font.PLAIN, 30);
 			BASE_FONT_TITLE = new Font("Tahoma", Font.BOLD, 62);

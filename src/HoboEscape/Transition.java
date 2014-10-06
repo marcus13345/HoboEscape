@@ -26,7 +26,6 @@ public class Transition extends Room {
 
 	@Override
 	public void tick() {
-		//System.out.println(transitionTime);
 		
 		// where to place things based up one time...
 		if (direction == Direction.RIGHT) {

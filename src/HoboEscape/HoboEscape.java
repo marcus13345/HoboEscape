@@ -111,7 +111,6 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(Images.titleScreenBackground, 0, 0, null);
 
-		// System.out.println(room);
 		try {
 			room.peek().paint(g2d);
 			int size = room.size();
@@ -121,12 +120,11 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 				str += "" + r.toString() + (i != size - 1 ? " -> " : "");
 				i ++;
 			}
-			g.setFont(new Font("Arial", Font.BOLD, 20));
-			g.setColor(Color.WHITE);
-			g.fillRect(0, 0, Main.WIDTH, 30);
-			g.setColor(Color.BLACK);
-			g.drawString(str, 10, 21);
-			// System.out.println(room);
+			// g.setFont(new Font("Arial", Font.BOLD, 20));
+			// g.setColor(Color.WHITE);
+			// g.fillRect(0, 0, Main.WIDTH, 30);
+			// g.setColor(Color.BLACK);
+			// g.drawString(str, 10, 21);
 		} catch (Exception e) {
 			// the underlying background is currently the non splash background.
 			// so before the
@@ -180,16 +178,12 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	public void mouseDragged(MouseEvent e) {
 		mouseX = e.getX();
 		mouseY = e.getY();
-		if (Main.debug > 1)
-			System.out.println("mouseX: " + mouseX + "\nmouseY: " + mouseY);
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		mouseX = e.getX();
 		mouseY = e.getY();
-		if (Main.debug > 1)
-			System.out.println("mouseX: " + mouseX + "\nmouseY: " + mouseY);
 	}
 
 	@Override
