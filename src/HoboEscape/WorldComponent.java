@@ -38,7 +38,7 @@ public class WorldComponent {
 	}
 
 	protected void render(Graphics2D g, int camX) {
-		if(texture == null)
+		if(texture != null)
 			g.drawImage(texture, (int)x - camX, (int)y, null);
 		else
 			g.drawImage(Images.NO_TEXTURE, 0, 0, null);

@@ -19,13 +19,12 @@ public class Images {
 	public static BufferedImage fog;
 
 	// tilesets
-	private static BufferedImage grassTileset;
+	public static BufferedImage grassTileset;
 	
 	// blocks of sorts
-	private static BufferedImage grass, grassLeft, grassRight, dirt, log, tree, grassSingle, bigTree;
+	public static BufferedImage grass, grassLeft, grassRight, dirt, log, tree, grassSingle, bigTree;
 	
-	
-	private static BufferedImage playerSheet, playerMask;
+	public static BufferedImage playerSheet, playerMask;
 	public static BufferedImage overlayBackground;
 
 	public Images() {
@@ -33,9 +32,7 @@ public class Images {
 			
 			long startTime = System.currentTimeMillis();
 			
-			System.out.println("Creating textures...");
-			splashBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
-			titleScreenBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
+			
 			try {
 				logo = ImageIO.read(new File(Main.BASE_DIR + "Logo.png"));
 				title = ImageIO.read(new File(Main.BASE_DIR + "Title.png"));
@@ -71,6 +68,9 @@ public class Images {
 			grassSingle = createTile(grassTileset, 64, 7, 1, 1, 1);
 			bigTree = createTile(grassTileset, 64, 0, 4, 3, 3);
 			
+			System.out.println("Creating textures...");
+			splashBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
+			titleScreenBackground = ImageHelper.creatImageWithStripes(Main.WIDTH, Main.HEIGHT, Main.BACKGROUND_COLOR);
 
 			// playerMask = createTile(playerSheet, 32, 48, 0, 0, 1, 1);
 			playerMask = tree;

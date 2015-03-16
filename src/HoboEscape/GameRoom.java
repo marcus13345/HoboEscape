@@ -5,6 +5,12 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * this is the room associated with rendering and applying game
+ * logic to all components within the game itself.
+ * @author mgosselin
+ *
+ */
 public class GameRoom extends Room {
 
 	public static ArrayList<WorldComponent> components;
@@ -20,16 +26,17 @@ public class GameRoom extends Room {
 		
 		
 		
-		camX = Player.getX() - Main.WIDTH / 2 + 16;
+		
+		//camX = Player.getX() - Main.WIDTH / 2 + 16;
 		
 		
 		//left bound...
-		camX = camX < 0 ? 0 : camX;
+		//camX = camX < 0 ? 0 : camX;
 		//how to right bound?
 		
 		
 		for (WorldComponent worldComponent : components) {
-			worldComponent.paint(g, (int)camX);
+			worldComponent.paint(g, (int)0);
 		}
 		
 		

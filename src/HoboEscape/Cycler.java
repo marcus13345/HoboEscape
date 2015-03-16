@@ -4,7 +4,11 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * this thing cycles images, used for creating a fog effect when needed.
+ * @author mgosselin
+ *
+ */
 public class Cycler {
 	private BufferedImage[] images;
 	private double time = 0;
@@ -33,6 +37,7 @@ public class Cycler {
 	
 	public void render(Graphics2D g) {
 		//lulmath
+		//once upon a really late night i made this and now i just assume it works. because it does.
 		AlphaComposite composite = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, (float)(        (Math.sin(Math.PI * (time / (float)MAX_TIME))*1.5) > 1 ? 1 : (Math.sin(Math.PI * (time / (float)MAX_TIME))*1.5)         ));
 		g.setComposite(composite);
 		g.drawImage(images[pointer], 0, 0, null);

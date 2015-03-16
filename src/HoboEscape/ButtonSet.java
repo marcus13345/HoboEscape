@@ -3,6 +3,13 @@ package HoboEscape;
 import java.awt.Graphics2D;
 import java.util.Stack;
 
+/**
+ * helpful class that makes lists of buttons just a bit easier to deal with from a
+ * menu creators viewpoint.
+ * 
+ * @author mgosselin
+ *
+ */
 public class ButtonSet {
 	private Stack<Button> buttons = new Stack<Button>();
 

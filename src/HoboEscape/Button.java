@@ -6,6 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
+/**
+ * button class that well. creates a button. you have to keep polling it
+ * to get any events out of it but i swear they totally exist.
+ * 
+ * @author mgosselin
+ *
+ */
 public class Button {
 	private Room room;
 	private int clickLevel = 0;
