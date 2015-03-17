@@ -1,5 +1,12 @@
 package HoboEscape;
 
+/**
+ * this is a class specifically set out to define a tree. because tree's have an AI and anything with an AI should have its own
+ * class to define that AI in. later create an AI class that can be overriden and applied to various objects, such as this tree
+ * 
+ * @author mgosselin
+ *
+ */
 public class Tree extends WorldComponent {
 	private static final int LEFT = 0, RIGHT = 1, TURN_LEFT = 2, TURN_RIGHT = 3;
 	private int animationTime;

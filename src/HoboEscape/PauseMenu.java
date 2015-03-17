@@ -3,7 +3,12 @@ package HoboEscape;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-
+/**
+ * this is the pause menu. again, exactly what it sounds like. it is the room that does everything that one may need in a pause menu.
+ * except all it does is resume the game. another one of the many "features" in this game.
+ * @author mgosselin
+ *
+ */
 public class PauseMenu extends Room implements ButtonListener{
 
 	private ButtonSet buttons;
@@ -55,5 +60,9 @@ public class PauseMenu extends Room implements ButtonListener{
 	
 	private void finish() {
 		HoboEscape.popRoom("panDown");
+	}
+	
+	public String toString() {
+		return "Pause Menu";
 	}
 }

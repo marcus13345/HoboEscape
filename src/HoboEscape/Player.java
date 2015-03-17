@@ -5,7 +5,11 @@ import java.awt.event.KeyEvent;
 
 /**
  * this class is loose with the definition of static so please only make one instance. 
- * i don't ever want more than one player controlled character so whatever.
+ * i don't ever want more than one player controlled character so whatever. and honestly
+ * its only static so it can track the x position.
+ * 
+ * later, upon world parsing, also pass back the component to be rendered about, so that little hacks like this
+ * dont have to happen? TODO
  * 
  * @author marcus
  *

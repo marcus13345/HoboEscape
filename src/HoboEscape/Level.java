@@ -5,11 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * this class takes level ids and creates an object out of it that holds
+ * metadata of that level and is capable of parsing it into an arraylist of
+ * world components for the game room when needed.
+ * 
+ * @author mgosselin
+ *
+ */
 public class Level {
 	private String name;
 	private boolean exists, locked;
-	
-	//base level root
+
+	// base level root
 	private String varPath;
 	private String fullPath;
 
@@ -18,7 +26,8 @@ public class Level {
 		fullPath = Main.BASE_DIR + "Levels\\" + id;
 		exists = new File(fullPath + "\\level.exists").exists();
 		if (exists) {
-			locked = Boolean.parseBoolean(new Variable(varPath, "locked", "false", false).getValue());
+			locked = Boolean.parseBoolean(new Variable(varPath, "locked",
+					"false", false).getValue());
 			name = new Variable(varPath, "name", "--name--", false).getValue();
 		} else {
 			locked = true;
@@ -42,11 +51,11 @@ public class Level {
 			String str = scanner.nextLine();
 			if (str.startsWith("#"))
 				continue;
-			
-			str = str.replace(" ", "").replace(";", "").toLowerCase();
-			
+
+			str = str.replace(" ", "").replace(";", "");
+
 			String[] parts = str.split("=");
-			switch(parts[0]) {
+			switch (parts[0]) {
 			case "x":
 				x = Integer.parseInt(parts[1]);
 				break;
@@ -60,30 +69,35 @@ public class Level {
 				type = parts[1];
 				break;
 			case "apply":
-				System.out.print("Type: " + type + "\n" + "Data: " + data + "\n" + "X:    " + x + "\n" + "Y:    " + y + "\n\n");
+				System.out.print("Type: " + type + "\n" + "Data: " + data
+						+ "\n" + "X:    " + x + "\n" + "Y:    " + y + "\n\n");
 				if (type.equals("tile")) {
-					components.add(new WorldComponent(x * Main.TILE_RES, y * Main.TILE_RES, Images.getTexture(data), true));
+					components.add(new WorldComponent(x * Main.TILE_RES, y
+							* Main.TILE_RES, Images.getTexture(data), true));
 				} else if (type.equals("tile-scenery")) {
-					components.add(new WorldComponent(x * Main.TILE_RES, y * Main.TILE_RES, Images.getTexture(data), false));
+					components.add(new WorldComponent(x * Main.TILE_RES, y
+							* Main.TILE_RES, Images.getTexture(data), false));
 				} else if (type.equals("width")) {
 					// width = Integer.parseInt(data);
 				} else if (type.equals("entity-block")) {
 					if (data.equals("tree")) {
 						// pplz, we made a tree.
 						// a walking tree
-						components.add(new Tree(x * Main.TILE_RES, y * Main.TILE_RES));
-					} else if(data.equals("player")) {
-						components.add(new Player(x*Main.TILE_RES, y*Main.TILE_RES));
+						components.add(new Tree(x * Main.TILE_RES, y
+								* Main.TILE_RES));
+					} else if (data.equals("player")) {
+						components.add(new Player(x * Main.TILE_RES, y
+								* Main.TILE_RES));
 					}
 				}
-				
+
 				break;
-				
+
 			}
-			
+
 		}
 		scanner.close();
-		
+
 		return components;
 	}
 

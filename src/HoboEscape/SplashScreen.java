@@ -4,7 +4,13 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-
+/**
+ * this class is the splash screen room. its used as the main room because stack based rooms. its on the bottom of the stack.
+ * all other rooms are sat on top of it. again, pressing q in game allows one to see the room stack.
+ * 
+ * @author mgosselin
+ *
+ */
 public class SplashScreen extends Room {
 	private static int maxTime = 120;
 	private final static int TIME_OFFSET = 60;
@@ -48,6 +54,10 @@ public class SplashScreen extends Room {
 	public void keyPressed(KeyEvent e) {
 		HoboEscape.pushRoom(Room.MENU, null);
 		Menu.stopAnimation();
+	}
+	
+	public String toString() {
+		return "SplashScreen";
 	}
 
 }

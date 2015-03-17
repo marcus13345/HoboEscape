@@ -7,11 +7,9 @@ import java.util.Formatter;
 import java.util.Scanner;
 
 /**
- * to note, will not work on Mac yet.
- * 
- * edit: WILL WORK ON MAC MOTHER FUCKERS
- * 
- * edit: idek if this will work on macs because app data...
+ * helpful little class that creates a string variable that gets saved in application 
+ * data. when you write to it, it gets saved as that file. and yes it only works on
+ * windows because i used backslashes and not the respective seperative character.
  * 
  * @author Marcus
  * 
@@ -113,9 +111,6 @@ public class Variable {
 			f.format("" + value);
 			f.close();
 		} catch (Exception e) {
-			// if(weArriveHere){
-			// we.are("fucked");
-			// }
 			e.printStackTrace();
 		}
 	}
@@ -134,7 +129,6 @@ public class Variable {
 	private void createFile() {
 		//make the directory because god knows, java can't do that for us
 		//when we say we want a new file in an unknown folder noooooo....
-		//jackass java
 		File f = new File(fileDir);
 		f.mkdirs();
 		
@@ -144,9 +138,6 @@ public class Variable {
 			//hopefully make the file...
 			f.createNewFile();
 		} catch (IOException e) {
-			// if(weArriveHere){
-			// we.are("fucked");
-			// }
 			e.printStackTrace();
 		}
 	}
@@ -158,7 +149,7 @@ public class Variable {
 	 */
 	private String getValueFromFile() {
 		try {
-			//create the file... we don't want to do anyth stupid checking because if its
+			//create the file... we don't want to do any stupid checking because if its
 			//not perfect, we honestly don't care, just return null and reset the variable
 			File f = new File(filePath);
 			

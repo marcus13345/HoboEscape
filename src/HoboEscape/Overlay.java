@@ -5,7 +5,13 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-
+/**
+ * this is a type of room. it creates a room with a room underneath it. because rooms are now stack based, 
+ * you can take one room and put it on top of the other. this room then stores the room under it.
+ * in game, press q to see the room stack.
+ * @author mgosselin
+ *
+ */
 public abstract class Overlay extends Room{
 	private Room under;
 	private static final float backgroundAlpha = 0.5f;

@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+/**
+ * menu room, exactly what it sounds like here. its a room that shows you the main menu. nothing special here. no buttons
+ * work but the play button. its a feature.
+ * @author mgosselin
+ *
+ */
 public class Menu extends Room implements ButtonListener{
 	private static double titleX, desiredTitleX;
 	private static final int TITLE_OFFSET = 4000;

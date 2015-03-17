@@ -3,6 +3,13 @@ package HoboEscape;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+/**
+ * world component takes care of everything involving blocks of really anything within the game world. everything is a component.
+ * contained within are variable that dictate things like what is considered within the object, if the object is collidable,
+ * how to render it, and other various things.
+ * @author mgosselin
+ *
+ */
 public class WorldComponent {
 	protected double x, y, width, height;
 	protected Image texture;

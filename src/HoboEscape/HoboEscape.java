@@ -17,6 +17,14 @@ import java.util.Stack;
 
 import javax.swing.JFrame;
 
+/**
+ * this is the main hobo escape class. called thusly because originally this was going to be a platformer
+ * in which you are a hobo running away from the police. this class takes care of a few things pertaining
+ * mostly to the managing of rooms which are the building block of the game, like a scene. as well
+ * it is responsible for managing the main JFrame/Canvas.
+ * @author mgosselin
+ *
+ */
 public class HoboEscape extends Canvas implements MouseMotionListener, KeyListener, MouseListener {
 
 	/**
@@ -104,6 +112,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	}
 
 	public void paint(Graphics g) {
+		System.out.println();
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Main.BACKGROUND_COLOR);
 		g2d.fillRect(0, 0, Main.WIDTH, Main.HEIGHT);
@@ -120,11 +129,11 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 				str += "" + r.toString() + (i != size - 1 ? " -> " : "");
 				i ++;
 			}
-			// g.setFont(new Font("Arial", Font.BOLD, 20));
-			// g.setColor(Color.WHITE);
-			// g.fillRect(0, 0, Main.WIDTH, 30);
-			// g.setColor(Color.BLACK);
-			// g.drawString(str, 10, 21);
+			g.setFont(new Font("Arial", Font.BOLD, 20));
+			g.setColor(Color.WHITE);
+			g.fillRect(0, 0, Main.WIDTH, 30);
+			g.setColor(Color.BLACK);
+			g.drawString(str, 10, 21);
 		} catch (Exception e) {
 			// the underlying background is currently the non splash background.
 			// so before the

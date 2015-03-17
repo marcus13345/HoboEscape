@@ -8,6 +8,15 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * this static class is how i create most of my graphics. i lack a graphics
+ * person at my side so i resort to math to create the pretty pictures i need.
+ * methods here create variuos things like alternating diagonal stripe patterns
+ * and card stock looking colored images.
+ * 
+ * @author mgosselin
+ *
+ */
 public class ImageHelper {
 	public static BufferedImage creatImageColorWithNoise(int width, int height,
 			Color c, int variationIterations) {
@@ -205,21 +214,23 @@ public class ImageHelper {
 		BufferedImage image = new BufferedImage(width, height,
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = image.getGraphics();
-		
+
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				double k = Math.random() * (multMax - multMin) + multMin;
-				graphics.setColor(new Color((int)(r*k), (int)(g*k), (int)(b*k)));
+				graphics.setColor(new Color((int) (r * k), (int) (g * k),
+						(int) (b * k)));
 				graphics.fillRect(i, j, 1, 1);
 			}
 		}
-		
+
 		return image;
-		
+
 	}
 
 	public static Image colorNoise(Color c, double d, double i, int width,
 			int height) {
-		return colorNoise(c.getRed(), c.getGreen(), c.getBlue(), d, i, width, height);
+		return colorNoise(c.getRed(), c.getGreen(), c.getBlue(), d, i, width,
+				height);
 	}
 }

@@ -3,7 +3,11 @@ package HoboEscape;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-
+/**
+ * another room here, not going to fully implement this until some sort of slider is created for the volume control
+ * @author mgosselin
+ *
+ */
 public class OptionsRoom extends Room implements ButtonListener {
 	
 	private ButtonSet buttons;

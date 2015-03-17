@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
 
+/**
+ * actual maine class that calls out to hobo escape with certain globals. should at some point merge this in some
+ * respect with the  globals class. TODO
+ * @author mgosselin
+ *
+ */
 public class Main {
 	
 	public static final int ASPECT_WIDTH = 16;

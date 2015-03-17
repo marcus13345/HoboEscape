@@ -2,9 +2,14 @@ package HoboEscape;
 
 import java.util.Stack;
 
-
+/**
+ * this is just a little helper class that levelroom uses to get all the levels' information then turn them into buttons.
+ * from there it takes those buttons and add them to its own little set of button with the respective IDs of the buttons
+ * as the IDs of the levels.
+ * @author mgosselin
+ *
+ */
 public class LevelSet {
-
 	private static Stack<Level> levels;
 	private static final int 
 			rows = 6, 

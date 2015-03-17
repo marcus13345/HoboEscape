@@ -9,6 +9,13 @@ import java.io.File;
 
 import javax.imageio.ImageIO;
 
+/**
+ * this class is a small multitude of things. it houses the main graphics variables, a parser to get from a string
+ * to one of those graphics. tileset base graphics, tile set seperator, and a few imagehelper style methods that
+ * should probably get ported over there sometime soon. TODO
+ * @author mgosselin
+ *
+ */
 public class Images {
 	public static BufferedImage NO_TEXTURE;
 	public static BufferedImage logo;

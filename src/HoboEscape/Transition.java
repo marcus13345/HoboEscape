@@ -3,6 +3,13 @@ package HoboEscape;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
+/**
+ * this class is a room that takes in a few other rooms and an animation direction. it is applied as a room on the room stack, then
+ * when the animation completes, it removes itself and adds the room that was transitioned to. (works a little differently internally
+ * but that is the effect of it.)
+ * @author mgosselin
+ *
+ */
 public class Transition extends Room {
 
 	private Room roomFrom, roomTo;

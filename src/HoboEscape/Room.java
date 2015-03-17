@@ -7,7 +7,12 @@ import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * this class is the parent class for dealing with rooms. it has an offset and that is taken account of in the button class as well.
+ * all because animation is awesome.
+ * @author mgosselin
+ *
+ */
 public abstract class Room {
 	/**
 	 * this, im sure, is bad practice. but oh well. im not doing the static
@@ -17,7 +22,7 @@ public abstract class Room {
 	 */
 	public static final Room MENU = new Menu();
 	public static final Room GAME_ROOM = new GameRoom();
-	public static final Room LEVELS = new Levels();
+	public static final Room LEVELS = new LevelRoom();
 	public static final Room SPLASH_SCREEN = new SplashScreen();
 	public static final Room PAUSE_MENU = new PauseMenu();
 	public static final Room OPTIONS_ROOM = new OptionsRoom();
