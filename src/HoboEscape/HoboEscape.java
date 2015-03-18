@@ -13,6 +13,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Stack;
 
 import javax.swing.JFrame;
@@ -36,7 +37,21 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	public static Stack<Room> room;
 	public static boolean[] keyCodes, keyChars;
 	private static boolean initialized = false;
+	
+	/**
+	 * THIS is a FINAL. it cannot be declared thusly because lord knows i cant make constants
+	 * at runtime. but it is. it is a constant.
+	 */
+	public static File thisJar;
 
+	static {
+		try{
+			thisJar = new File(HoboEscape.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+		}catch(Exception e) {
+		}
+		Variable.setBaseDir("" + thisJar.getParent());
+	}
+	
 	public HoboEscape() {
 
 		// do initialization stuff for the window... ew
