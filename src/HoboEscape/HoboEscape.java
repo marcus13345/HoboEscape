@@ -85,7 +85,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			}
 			repaint();
 		}
-		while (/* !(Display.isCloseRequested()) */true) {
+		while (true) {
 			tick();
 			
 			repaint();
@@ -94,10 +94,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 			} catch (Exception e) {
 
 			}
-			// Display.update();
-			// Display.sync(30);
 		}
-		// System.exit(0);
 	}
 
 	private void tick() {
