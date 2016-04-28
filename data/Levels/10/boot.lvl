@@ -1,0 +1,39 @@
+x = 0;
+y = 8;
+type = tile;
+data = grass;
+apply;
+
+x = 1;
+apply;
+x = 2;
+apply;
+x = 3;
+apply;
+x = 4;
+apply;
+x = 5;
+data = grassRight;
+apply;
+
+x = 8;
+data = grassLeft;
+apply;
+data = grass;
+x = 9;
+apply;
+data = grassRight;
+x = 10;
+apply;
+
+x=9;
+y=7;
+type=tile-scenery;
+data = tree;
+apply;
+
+x = 3;
+y = 4;
+type = entity-block;
+data = player;
+apply;

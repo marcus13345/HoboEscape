@@ -37,6 +37,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 	public static Stack<Room> room;
 	public static boolean[] keyCodes, keyChars;
 	private static boolean initialized = false;
+	private JFrame frame;
 	
 	/**
 	 * THIS is a FINAL. it cannot be declared thusly because lord knows i cant make constants
@@ -56,7 +57,7 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 
 		// do initialization stuff for the window... ew
 		setSize(Main.WIDTH, Main.HEIGHT);
-		JFrame frame = new JFrame();
+		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setVisible(true);
 		frame.add(this);
@@ -141,11 +142,14 @@ public class HoboEscape extends Canvas implements MouseMotionListener, KeyListen
 				str += "" + r.toString() + (i != size - 1 ? " -> " : "");
 				i ++;
 			}
+			/*
 			g.setFont(new Font("Arial", Font.BOLD, 20));
 			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, Main.WIDTH, 30);
 			g.setColor(Color.BLACK);
 			g.drawString(str, 10, 21);
+			*/
+			frame.setTitle(str);
 		} catch (Exception e) {
 			// the underlying background is currently the non splash background.
 			// so before the

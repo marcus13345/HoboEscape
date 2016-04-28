@@ -24,8 +24,9 @@ public class Main {
 	public static int debug = 0;
 	public static Font BASE_FONT, BASE_FONT_TITLE;
 	private static final double DIAGONAL = Math.sqrt(Math.pow(WIDTH, 2) + Math.pow(HEIGHT, 2)) / 1174.8838240438924;
-	
-	public static final String BASE_DIR = System.getenv("APPDATA") + "\\MAndWorks\\HoboEscape\\";
+
+	//public static final String BASE_DIR = System.getenv("APPDATA") + "\\MAndWorks\\HoboEscape\\";
+	public static final String BASE_DIR = "data\\";
 	
 	public static void main(String[] args) {
 		
