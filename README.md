@@ -1,6 +1,6 @@
 # HoboEscape
 
-This is a test of a stack based room system. when running, the title will display the current room stack. a stack is used so that the previous room is always kept in memory with indefinite depth.
+This originally was a game idea, in which you were a hobo running away from something, finite runner style, but turned in to a place to test out stack based rooms and creating a custom filetype with the level information.
 
 ## Room Transitions
 
